@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+#include <limits>
+
 #include "classes/Trajet.h"
 #include "classes/TrajetSimple.h"
 #include "classes/TrajetCompose.h"
@@ -9,6 +11,7 @@ using namespace std;
 
 
 int main() {
+    /*
     // Creation des trajets simples
     TrajetSimple TS1('A', 'B', "MT1");
     TrajetSimple TS2('B', 'C', "MT1");
@@ -51,11 +54,12 @@ int main() {
     // catalogue.RechercheSimple(departVoyageSouhaite, arriveeVoyageSouhaite);
     catalogue.RechercheAvancee(departVoyageSouhaite, arriveeVoyageSouhaite);
     cout << endl;
+    */
 
 
 
 
-    system("clear");
+    //system("clear");
     // ASCII art for "Bienvenue!"
     cout << ".______    __   _______ .__   __. ____    ____  _______ .__   __.  __    __   _______  __ \n";
     cout << "|   _  \\  |  | |   ____||  \\ |  | \\   \\  /   / |   ____||  \\ |  | |  |  |  | |   ____||  |\n";
@@ -64,7 +68,9 @@ int main() {
     cout << "|  |_)  | |  | |  |____ |  |\\   |    \\    /    |  |____ |  |\\   | |  `--'  | |  |____ |__|\n";
     cout << "|______/  |__| |_______||__| \\__|     \\__/     |_______||__| \\__|  \\______/  |_______|(__)\n";
     cout << "\n\n";
-                                                                                            
+
+    Catalogue catalogue;
+    char departVoyageSouhaite, arriveeVoyageSouhaite;                                                      
     
     while(true) {
         cout << "Veuillez bien choisir une option du menu suivant:" << endl;
@@ -119,6 +125,11 @@ int main() {
                             trajets[i] = new TrajetSimple(depart, arrivee, moyenTransport);
                         }
                         catalogue.AjouterTrajet(new TrajetCompose(trajets, nombreTrajets));
+                        
+                        for (unsigned int i = 0; i < nombreTrajets; i++) {
+                            delete trajets[i];
+                        }
+                        delete[] trajets;
                         break;
                     }
                     default: {

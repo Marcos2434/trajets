@@ -22,9 +22,18 @@ Catalogue::~Catalogue() {
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
-
-    delete[] trajets;
-    delete[] buffer;
+    if (capacite > 0) {
+        for (unsigned int i = 0; i < nombreTrajets; i++) {
+            delete trajets[i];
+        }
+        delete[] trajets;
+    }
+    if (capaciteBuffer > 0) {
+        for (unsigned int i = 0; i < nombreTrajetsBuffer; i++) {
+            delete buffer[i];
+        }
+        delete[] buffer;
+    }
 }
 
 void Catalogue::AjouterTrajet(Trajet* trajet) {
@@ -36,7 +45,9 @@ void Catalogue::AjouterTrajet(Trajet* trajet) {
         for (unsigned int i = 0; i < nombreTrajets; i++) {
             nouveauTableau[i] = trajets[i]; // on copie les pointeurs du tableau originale au nouveau
         }
-        delete[] trajets;
+        if (capacite > 1) {
+            delete[] trajets;
+        }
         trajets = nouveauTableau;
     }
     trajets[nombreTrajets++] = trajet;
@@ -51,7 +62,9 @@ void Catalogue::AjouterTrajetBuffer(Trajet* trajet) {
         for (unsigned int i = 0; i < nombreTrajetsBuffer; i++) {
             nouveauTableau[i] = buffer[i]; // on copie les pointeurs du tableau originale au nouveau
         }
-        delete[] buffer;
+        if (capaciteBuffer > 1) {
+            delete[] buffer;
+        }
         buffer = nouveauTableau;
     }
     buffer[nombreTrajetsBuffer++] = trajet;

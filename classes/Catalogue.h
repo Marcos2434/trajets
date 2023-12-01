@@ -22,8 +22,8 @@ private:
     unsigned int capacite;
 
     Trajet** buffer;
-    unsigned int nombreTrajetsBuffer;
-    unsigned int capaciteBuffer;
+    unsigned int nombreTrajetsBuffer = 0;
+    unsigned int capaciteBuffer = 0;
 
     void AjouterTrajetBuffer(Trajet* trajet);
 
