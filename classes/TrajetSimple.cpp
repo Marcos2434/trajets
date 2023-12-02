@@ -8,7 +8,7 @@ using namespace std;
 TrajetSimple::TrajetSimple(char depart, char arrivee, const char* moyenTransport)
     : depart(depart), arrivee(arrivee), moyenTransport(moyenTransport) {
     #ifdef MAP
-        cout << "Appel au constructeur de <TrajetCompose>" << endl;
+        cout << "Appel au constructeur de <TrajetSimple>" << endl;
     #endif
 }
 

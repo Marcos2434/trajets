@@ -8,7 +8,7 @@ public:
     virtual void Afficher() const = 0;
     virtual char getDepart() const = 0;
     virtual char getArrivee() const = 0;
-    virtual ~Trajet() {} // virtual destructor for a base class
+    virtual ~Trajet() {};
 
 protected:
 };

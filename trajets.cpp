@@ -11,15 +11,19 @@ using namespace std;
 
 
 int main() {
-    /*
-    // Creation des trajets simples
+    /* 
+
+    Des Executions bases de tests
+
+
+    // Example de creation des trajets simples
     TrajetSimple TS1('A', 'B', "MT1");
     TrajetSimple TS2('B', 'C', "MT1");
 
     // TS1.Afficher();
     // TS2.Afficher();
 
-    // Creation des trajets composés
+    // Example de creation des trajets composés
 
     Trajet* trajets1[] = {
         new TrajetSimple('B', 'Y', "MT3"),
@@ -35,7 +39,7 @@ int main() {
     TrajetCompose TC2(trajets2, 2);
 
 
-    // Construction du catalogue
+    // Example de construction du catalogue
     // L’ajout de trajets simples ou composés au catalogue courant
     Catalogue catalogue;
 
@@ -56,10 +60,7 @@ int main() {
     cout << endl;
     */
 
-
-
-
-    //system("clear");
+    // system("clear");
     // ASCII art for "Bienvenue!"
     cout << ".______    __   _______ .__   __. ____    ____  _______ .__   __.  __    __   _______  __ \n";
     cout << "|   _  \\  |  | |   ____||  \\ |  | \\   \\  /   / |   ____||  \\ |  | |  |  |  | |   ____||  |\n";
@@ -70,8 +71,9 @@ int main() {
     cout << "\n\n";
 
     Catalogue catalogue;
-    char departVoyageSouhaite, arriveeVoyageSouhaite;                                                      
+    char departVoyageSouhaite, arriveeVoyageSouhaite;   
     
+    // Interface utilisateur
     while(true) {
         cout << "Veuillez bien choisir une option du menu suivant:" << endl;
         const char* options[] = {
@@ -87,7 +89,7 @@ int main() {
         int option;
         cout << "\n> ";
         cin >> option;
-        system("clear");
+        // system("clear");
 
         switch(option) {
             case 1: {
@@ -97,6 +99,7 @@ int main() {
                 switch(optionTypeTrajet) {
                     case 1: {
                         cout << "Veuillez definir le trajet simple" << endl;
+                        cout << "Attention! Les stations sont définies comme des caractères" << endl;
                         char depart, arrivee, moyenTransport[10];
                         cout << "Depart (Ex. A): ";
                         cin >> depart;
@@ -108,29 +111,32 @@ int main() {
                         break;
                     }
                     case 2: {
-                        cout << "Veuillez definir le trajet compose" << endl;
                         unsigned int nombreTrajets;
-                        char depart, arrivee, moyenTransport[10];
-                        cout << "Nombre de trajets: ";
+                        cout << "Combien de trajets simples voulez-vous ajouter au trajet compose?" << endl;
                         cin >> nombreTrajets;
+
                         Trajet** trajets = new Trajet*[nombreTrajets];
+                        char depart, arrivee, moyenTransport[10];
+
                         for (unsigned int i = 0; i < nombreTrajets; i++) {
-                            cout << "Trajet no." << i+1 << endl;
-                            cout << "Depart: ";
+                            cout << "Depart (Ex. A): ";
                             cin >> depart;
-                            cout << "Arrivee: ";
+                            cout << "Arrivee (Ex. B): ";
                             cin >> arrivee;
-                            cout << "Moyen de transport: ";
+                            cout << "Moyen de transport (Ex. MT1): ";
                             cin >> moyenTransport;
                             trajets[i] = new TrajetSimple(depart, arrivee, moyenTransport);
                         }
-                        catalogue.AjouterTrajet(new TrajetCompose(trajets, nombreTrajets));
-                        
-                        for (unsigned int i = 0; i < nombreTrajets; i++) {
-                            delete trajets[i];
-                        }
-                        delete[] trajets;
-                        break;
+
+                        TrajetCompose* TC = new TrajetCompose(trajets, nombreTrajets);
+                        catalogue.AjouterTrajet(TC);
+
+                        // On libere pas la memorie car le catalogue s'en occupe à la fin du programme
+                        // for (unsigned int i = 0; i < nombreTrajets; i++) {
+                        //     delete trajets[i];
+                        // }
+                        // delete[] trajets;
+                        break;                        
                     }
                     default: {
                         cout << "Veuillez choisir une option valide (1 ou 2)" << endl;
@@ -148,17 +154,45 @@ int main() {
                 break;
             }
             case 3: {
-                cout << "Veuillez definir le trajet compose" << endl;
-                cout << "Depart: ";
-                cin >> departVoyageSouhaite;
-                cout << "Arrivee: ";
-                cin >> arriveeVoyageSouhaite;
-                cout << endl;
-                catalogue.RechercheAvancee(departVoyageSouhaite, arriveeVoyageSouhaite);
-                cout << endl;
-                cout << endl << "Appuyez sur une touche pour continuer..." << endl;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cin.get();
+
+                int optionTypeRecherche;
+                cout << "Quel type de recherche voulez-vous effectuer?" << "\n1. Simple" << "\n2. Avancee" << "\n> ";
+                cin >> optionTypeRecherche;
+                switch(optionTypeRecherche) {
+                    case 1: {
+                        cout << "Veuillez definir le trajet simple" << endl;
+                        cout << "Attention! Les stations sont définies comme des caractères" << endl;
+                        cout << "Depart: ";
+                        cin >> departVoyageSouhaite;
+                        cout << "Arrivee: ";
+                        cin >> arriveeVoyageSouhaite;
+                        cout << endl;
+                        catalogue.RechercheSimple(departVoyageSouhaite, arriveeVoyageSouhaite);
+                        cout << endl;
+                        cout << endl << "Appuyez sur une touche pour continuer..." << endl;
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        cin.get();
+                        break;
+                    }
+                    case 2: {
+                        cout << "Veuillez definir le trajet compose" << endl;
+                        cout << "Depart: ";
+                        cin >> departVoyageSouhaite;
+                        cout << "Arrivee: ";
+                        cin >> arriveeVoyageSouhaite;
+                        cout << endl;
+                        catalogue.RechercheAvancee(departVoyageSouhaite, arriveeVoyageSouhaite);
+                        cout << endl;
+                        cout << endl << "Appuyez sur une touche pour continuer..." << endl;
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        cin.get();
+                        break;
+                    }
+                    default: {
+                        cout << "Veuillez choisir une option valide (1 ou 2)" << endl;
+                        break;
+                    }
+                }
                 break;
             }
             case 4: {
@@ -169,9 +203,6 @@ int main() {
                 break;
             }
         }
-        system("clear");
+        // system("clear");
     }
-
-
-
 };

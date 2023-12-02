@@ -14,7 +14,7 @@ Catalogue::Catalogue() : trajets(nullptr), nombreTrajets(0), capacite(0) {
 Catalogue::Catalogue(Trajet** trajets, unsigned int nombreTrajets, unsigned int capacite)
     : trajets(trajets), nombreTrajets(nombreTrajets), capacite(capacite) {
 #ifdef MAP
-    cout << "Appel au constructeur de <Catalogue> no.2" << endl;
+    cout << "Appel au constructeur de <Catalogue>" << endl;
 #endif
 }
 
@@ -22,12 +22,14 @@ Catalogue::~Catalogue() {
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
+    // on libère la mémoire allouée pour les trajets
     if (capacite > 0) {
         for (unsigned int i = 0; i < nombreTrajets; i++) {
             delete trajets[i];
         }
         delete[] trajets;
     }
+    // on libère la mémoire allouée pour le buffer
     if (capaciteBuffer > 0) {
         for (unsigned int i = 0; i < nombreTrajetsBuffer; i++) {
             delete buffer[i];
@@ -37,6 +39,8 @@ Catalogue::~Catalogue() {
 }
 
 void Catalogue::AjouterTrajet(Trajet* trajet) {
+    // on vérifie si le tableau est plein
+    // si oui, on double la capacité
     if (nombreTrajets >= capacite) {
         capacite == 0 ? ++capacite : capacite *= 2;
 
@@ -50,10 +54,13 @@ void Catalogue::AjouterTrajet(Trajet* trajet) {
         }
         trajets = nouveauTableau;
     }
+    // on ajoute le trajet au tableau
     trajets[nombreTrajets++] = trajet;
 }
 
 void Catalogue::AjouterTrajetBuffer(Trajet* trajet) {
+    // on vérifie si le tableau est plein
+    // si oui, on double la capacité
     if (nombreTrajetsBuffer >= capaciteBuffer) {
         capaciteBuffer == 0 ? ++capaciteBuffer : capaciteBuffer *= 2;
 
@@ -67,10 +74,12 @@ void Catalogue::AjouterTrajetBuffer(Trajet* trajet) {
         }
         buffer = nouveauTableau;
     }
+    // on ajoute le trajet au tableau
     buffer[nombreTrajetsBuffer++] = trajet;
 }
 
 void Catalogue::Afficher() const {
+    // on affiche tous les trajets
     for (unsigned int i = 0; i < nombreTrajets; i++) {
         cout << "Trajet no." << i+1 << ": ";
         trajets[i]->Afficher();
@@ -79,6 +88,7 @@ void Catalogue::Afficher() const {
 }
 
 void Catalogue::RechercheSimple(char departVoyageSouhaite, char arriveeVoyageSouhaite) const {
+    // on affiche tous les trajets qui correspondent au voyage souhaité de manière simple
     for (unsigned int i = 0; i < nombreTrajets; i++)
         if (departVoyageSouhaite == trajets[i]->getDepart() && arriveeVoyageSouhaite == trajets[i]->getArrivee()) {
             trajets[i]->Afficher();
@@ -87,6 +97,7 @@ void Catalogue::RechercheSimple(char departVoyageSouhaite, char arriveeVoyageSou
 }
 
 void Catalogue::RechercheAvancee(char departVoyageSouhaite, char arriveeVoyageSouhaite) {
+    // on affiche tous les trajets qui correspondent au voyage souhaité
     for (unsigned int i = 0; i < nombreTrajets; i++) {
         if (trajets[i]->getDepart() == departVoyageSouhaite && trajets[i]->getArrivee() == arriveeVoyageSouhaite) {
             if (nombreTrajetsBuffer > 0) {

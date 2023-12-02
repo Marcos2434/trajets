@@ -1,5 +1,5 @@
 all: trajets
-CXXFLAGS = -std=c++11 -Wall
+CXXFLAGS = -std=c++11 -Wall # -DMAP
 
 trajets: trajets.o classes/Trajet.o classes/TrajetSimple.o classes/TrajetCompose.o classes/Catalogue.o
 	g++ $(CXXFLAGS) -o trajets trajets.o classes/Trajet.o classes/TrajetSimple.o classes/TrajetCompose.o classes/Catalogue.o
@@ -21,3 +21,6 @@ Catalogue.o: classes/Catalogue.cpp classes/Catalogue.h classes/Trajet.h classes/
 
 run: main
 	./trajet
+
+clean:
+	rm -f trajets *.o
