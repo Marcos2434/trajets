@@ -1,9 +1,43 @@
-// TrajetSimple.cpp
+// TRAJET_SIMPLE_CPP
 
-#include "TrajetSimple.h"
+/*************************************************************************
+                           TrajetSimple.cpp  -  Fichier d'implémentation
+                                -------------------
+            TrajetSimple est une classe qui hérite de Trajet. Elle représente
+            un trajet simple, c'est-à-dire un trajet direct entre deux villes.
+            La classe TrajetSimple fournit des méthodes pour afficher le trajet,
+            ainsi que pour obtenir le point de départ et le point d'arrivée du trajet.
+                             -------------------
+    début                : 20/11/2023
+    copyright            : (C) 2023 par Marcos Bauch Mira
+    e-mail               : marcosbauch2434@gmail.com
+*************************************************************************/
+//---------- Réalisation de la classe <TrajetSimple> (fichier TrajetSimple.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
 #include <iostream>
 
-using namespace std;
+//------------------------------------------------------ Include personnel
+#include "TrajetSimple.h"
+
+//------------------------------------------------------------- Constantes
+
+//----------------------------------------------------------------- PUBLIC
+
+//----------------------------------------------------- Méthodes publiques
+
+void TrajetSimple::Afficher() const {cout << "de " << depart << " à " << arrivee << " en " << moyenTransport;}
+
+char TrajetSimple::GetDepart() const {return depart;}
+
+char TrajetSimple::GetArrivee() const {return arrivee;}
+
+//------------------------------------------------- Surcharge d'opérateurs
+
+//-------------------------------------------- Constructeurs - destructeur
 
 TrajetSimple::TrajetSimple(char& depart, char& arrivee, const char* moyenTransport)
     : depart(depart), arrivee(arrivee), moyenTransport(moyenTransport) {
@@ -19,8 +53,13 @@ TrajetSimple::TrajetSimple(const TrajetSimple& other)
     #endif
 }
 
-void TrajetSimple::Afficher() const {cout << "de " << depart << " à " << arrivee << " en " << moyenTransport;}
+TrajetSimple::~TrajetSimple() {
+    #ifdef MAP
+        cout << "Appel au destructeur de <TrajetSimple>" << endl;
+    #endif
+}
 
-char TrajetSimple::GetDepart() const {return depart;}
+//------------------------------------------------------------------ PRIVE
 
-char TrajetSimple::GetArrivee() const {return arrivee;}
+//----------------------------------------------------- Méthodes protégées
+

@@ -1,49 +1,34 @@
-// Catalogue.cpp
+// CATALOGUE_CPP
 
-#include "Catalogue.h"
+/*************************************************************************
+                           Catalogue.cpp -  Fichier d'implémentation
+                                -------------------
+        Ce fichier contient la déclaration de la classe Catalogue, qui 
+        représente une collection d'objets Trajet. La classe Catalogue 
+        fournit des méthodes pour ajouter et afficher des objets Trajet, 
+        ainsi que pour effectuer des recherches simples et avancées.
+
+                             -------------------
+    début                : 20/11/2023
+    copyright            : (C) 2023 par Marcos Bauch Mira
+    e-mail               : marcosbauch2434@gmail.com
+*************************************************************************/
+//---------- Réalisation de la classe <Catalogue> (fichier Catalogue.cpp) ------------
+
+//---------------------------------------------------------------- INCLUDE
+
+//-------------------------------------------------------- Include système
+using namespace std;
 #include <iostream>
 
-using namespace std;
+//------------------------------------------------------ Include personnel
+#include "Catalogue.h"
 
-Catalogue::Catalogue() : trajets(nullptr), nombreTrajets(0), capacite(0) {
-#ifdef MAP
-    cout << "Appel au constructeur de <Catalogue>" << endl;
-#endif
-}
+//------------------------------------------------------------- Constantes
 
-Catalogue::Catalogue(Trajet** trajets, unsigned int nombreTrajets, unsigned int capacite)
-    : trajets(trajets), nombreTrajets(nombreTrajets), capacite(capacite) {
-#ifdef MAP
-    cout << "Appel au constructeur de <Catalogue>" << endl;
-#endif
-}
+//----------------------------------------------------------------- PUBLIC
 
-Catalogue::Catalogue(const Catalogue& other) : trajets(other.trajets), nombreTrajets(other.nombreTrajets), capacite(other.capacite) {
-    #ifdef MAP
-        cout << "Appel au constructeur de copie de <Catalogue>" << endl;
-    #endif
-};
-
-Catalogue::~Catalogue() {
-#ifdef MAP
-    cout << "Appel au destructeur de <Catalogue>" << endl;
-#endif
-    // on libère la mémoire allouée pour les trajets
-    if (capacite > 0) {
-        for (unsigned int i = 0; i < nombreTrajets; i++) {
-            delete trajets[i];
-        }
-        delete[] trajets;
-    }
-    // on libère la mémoire allouée pour le buffer
-    if (capaciteBuffer > 0) {
-        for (unsigned int i = 0; i < nombreTrajetsBuffer; i++) {
-            delete buffer[i];
-        }
-        delete[] buffer;
-    }
-}
-
+//----------------------------------------------------- Méthodes publiques
 void Catalogue::AjouterTrajet(Trajet* trajet) {
     // on vérifie si le tableau est plein
     // si oui, on double la capacité
@@ -126,3 +111,52 @@ void Catalogue::RechercheAvancee(char departVoyageSouhaite, char arriveeVoyageSo
         }
     }
 }
+
+//------------------------------------------------- Surcharge d'opérateurs
+
+//-------------------------------------------- Constructeurs - destructeur
+
+Catalogue::Catalogue() : trajets(nullptr), nombreTrajets(0), capacite(0) {
+#ifdef MAP
+    cout << "Appel au constructeur de <Catalogue>" << endl;
+#endif
+}
+
+Catalogue::Catalogue(Trajet** trajets, unsigned int nombreTrajets, unsigned int capacite)
+    : trajets(trajets), nombreTrajets(nombreTrajets), capacite(capacite) {
+#ifdef MAP
+    cout << "Appel au constructeur de <Catalogue>" << endl;
+#endif
+}
+
+Catalogue::Catalogue(const Catalogue& other) : trajets(other.trajets), nombreTrajets(other.nombreTrajets), capacite(other.capacite) {
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <Catalogue>" << endl;
+    #endif
+};
+
+Catalogue::~Catalogue() {
+#ifdef MAP
+    cout << "Appel au destructeur de <Catalogue>" << endl;
+#endif
+    // on libère la mémoire allouée pour les trajets
+    if (capacite > 0) {
+        for (unsigned int i = 0; i < nombreTrajets; i++) {
+            delete trajets[i];
+        }
+        delete[] trajets;
+    }
+    // on libère la mémoire allouée pour le buffer
+    if (capaciteBuffer > 0) {
+        for (unsigned int i = 0; i < nombreTrajetsBuffer; i++) {
+            delete buffer[i];
+        }
+        delete[] buffer;
+    }
+}
+
+
+//------------------------------------------------------------------ PRIVE
+
+//----------------------------------------------------- Méthodes protégées
+
