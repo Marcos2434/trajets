@@ -5,10 +5,17 @@
 
 using namespace std;
 
-TrajetCompose::TrajetCompose(Trajet** trajets, unsigned int nombreTrajets)
+TrajetCompose::TrajetCompose(Trajet** trajets, unsigned int & nombreTrajets)
     : trajets(trajets), nombreTrajets(nombreTrajets) {
     #ifdef MAP
         cout << "Appel au constructeur de <TrajetCompose>" << endl;
+    #endif
+}
+
+TrajetCompose::TrajetCompose(const TrajetCompose& other)
+    : trajets(other.trajets), nombreTrajets(other.nombreTrajets) {
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <TrajetCompose>" << endl;
     #endif
 }
 

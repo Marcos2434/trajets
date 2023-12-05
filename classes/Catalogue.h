@@ -11,6 +11,8 @@ public:
     Catalogue(Trajet** trajets, unsigned int nombreTrajets, unsigned int capacite);
     ~Catalogue();
 
+    Catalogue(const Catalogue& other);
+
     void AjouterTrajet(Trajet* trajet);
     void Afficher() const;
     void RechercheSimple(char departVoyageSouhaite, char arriveeVoyageSouhaite) const;

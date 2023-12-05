@@ -7,7 +7,8 @@
 
 class TrajetCompose : public Trajet {
 public:
-    TrajetCompose(Trajet** trajets, unsigned int nombreTrajets);
+    TrajetCompose(Trajet** trajets, unsigned int & nombreTrajets);
+    TrajetCompose(const TrajetCompose& other);
     void Afficher() const override;
     char GetDepart() const override;
     char GetArrivee() const override;

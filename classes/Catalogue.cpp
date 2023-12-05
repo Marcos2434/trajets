@@ -18,6 +18,12 @@ Catalogue::Catalogue(Trajet** trajets, unsigned int nombreTrajets, unsigned int 
 #endif
 }
 
+Catalogue::Catalogue(const Catalogue& other) : trajets(other.trajets), nombreTrajets(other.nombreTrajets), capacite(other.capacite) {
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <Catalogue>" << endl;
+    #endif
+};
+
 Catalogue::~Catalogue() {
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;

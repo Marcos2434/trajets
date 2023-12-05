@@ -5,10 +5,17 @@
 
 using namespace std;
 
-TrajetSimple::TrajetSimple(char depart, char arrivee, const char* moyenTransport)
+TrajetSimple::TrajetSimple(char& depart, char& arrivee, const char* moyenTransport)
     : depart(depart), arrivee(arrivee), moyenTransport(moyenTransport) {
     #ifdef MAP
         cout << "Appel au constructeur de <TrajetSimple>" << endl;
+    #endif
+}
+
+TrajetSimple::TrajetSimple(const TrajetSimple& other)
+    : depart(other.depart), arrivee(other.arrivee), moyenTransport(other.moyenTransport) {
+    #ifdef MAP
+        cout << "Appel au constructeur de copie de <TrajetSimple>" << endl;
     #endif
 }
 

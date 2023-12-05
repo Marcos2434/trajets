@@ -136,6 +136,7 @@ int main() {
                         //     delete trajets[i];
                         // }
                         // delete[] trajets;
+                        
                         break;                        
                     }
                     default: {
