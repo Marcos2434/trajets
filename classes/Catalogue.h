@@ -16,7 +16,7 @@ public:
     void AjouterTrajet(Trajet* trajet);
     void Afficher() const;
     void RechercheSimple(char departVoyageSouhaite, char arriveeVoyageSouhaite) const;
-    void RechercheAvancee(char departVoyageSouhaite, char arriveeVoyageSouhaite);
+    void RechercheAvancee(char departVoyageSouhaite, char arriveeVoyageSouhaite); // pas const car on doit changer le buffer
 
 private:
     Trajet** trajets;

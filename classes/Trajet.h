@@ -10,9 +10,10 @@ class Trajet {
         virtual void Afficher() const = 0;
         virtual char GetDepart() const = 0;
         virtual char GetArrivee() const = 0;
-        virtual ~Trajet() {};
+        virtual ~Trajet();
 
     protected:
+        Trajet(); // On protège car il ne faut pas instancier de trajet (o-24)
 };
 
 #endif // TRAJET_H
