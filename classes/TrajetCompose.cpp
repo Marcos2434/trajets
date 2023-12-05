@@ -26,6 +26,16 @@ void TrajetCompose::Afficher() const {
     }
 }
 
+TrajetCompose::~TrajetCompose() {
+    #ifdef MAP
+        cout << "Appel au destructeur de <TrajetCompose>" << endl;
+    #endif
+    for (unsigned int i = 0; i < nombreTrajets; i++) {
+        delete trajets[i];
+    }
+    delete[] trajets;
+}
+
 char TrajetCompose::GetDepart() const {return trajets[0]->GetDepart();}
 
 char TrajetCompose::GetArrivee() const {return trajets[nombreTrajets - 1]->GetArrivee();}
