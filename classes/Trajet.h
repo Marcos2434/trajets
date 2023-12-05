@@ -4,13 +4,15 @@
 #define TRAJET_H
 
 class Trajet {
-public:
-    virtual void Afficher() const = 0;
-    virtual char getDepart() const = 0;
-    virtual char getArrivee() const = 0;
-    virtual ~Trajet() {};
+    // Classe abstraite de base pour les trajets simples et composés
+    
+    public:
+        virtual void Afficher() const = 0;
+        virtual char GetDepart() const = 0;
+        virtual char GetArrivee() const = 0;
+        virtual ~Trajet() {};
 
-protected:
+    protected:
 };
 
 #endif // TRAJET_H

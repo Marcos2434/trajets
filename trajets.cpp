@@ -13,7 +13,7 @@ using namespace std;
 int main() {
     /* 
 
-    Des Executions bases de tests
+    Des Executions bases pour tester et developper (ignorer)
 
 
     // Example de creation des trajets simples
@@ -60,7 +60,7 @@ int main() {
     cout << endl;
     */
 
-    // system("clear");
+    system("clear");
     // ASCII art for "Bienvenue!"
     cout << ".______    __   _______ .__   __. ____    ____  _______ .__   __.  __    __   _______  __ \n";
     cout << "|   _  \\  |  | |   ____||  \\ |  | \\   \\  /   / |   ____||  \\ |  | |  |  |  | |   ____||  |\n";
@@ -89,7 +89,7 @@ int main() {
         int option;
         cout << "\n> ";
         cin >> option;
-        // system("clear");
+        system("clear");
 
         switch(option) {
             case 1: {
@@ -160,7 +160,6 @@ int main() {
                 cin >> optionTypeRecherche;
                 switch(optionTypeRecherche) {
                     case 1: {
-                        cout << "Veuillez definir le trajet simple" << endl;
                         cout << "Attention! Les stations sont définies comme des caractères" << endl;
                         cout << "Depart: ";
                         cin >> departVoyageSouhaite;
@@ -175,7 +174,6 @@ int main() {
                         break;
                     }
                     case 2: {
-                        cout << "Veuillez definir le trajet compose" << endl;
                         cout << "Depart: ";
                         cin >> departVoyageSouhaite;
                         cout << "Arrivee: ";
@@ -203,6 +201,6 @@ int main() {
                 break;
             }
         }
-        // system("clear");
+        system("clear");
     }
 };

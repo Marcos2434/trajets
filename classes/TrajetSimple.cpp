@@ -14,6 +14,6 @@ TrajetSimple::TrajetSimple(char depart, char arrivee, const char* moyenTransport
 
 void TrajetSimple::Afficher() const {cout << "de " << depart << " à " << arrivee << " en " << moyenTransport;}
 
-char TrajetSimple::getDepart() const {return depart;}
+char TrajetSimple::GetDepart() const {return depart;}
 
-char TrajetSimple::getArrivee() const {return arrivee;}
+char TrajetSimple::GetArrivee() const {return arrivee;}

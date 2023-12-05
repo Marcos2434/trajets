@@ -25,7 +25,7 @@ private:
     unsigned int nombreTrajetsBuffer = 0;
     unsigned int capaciteBuffer = 0;
 
-    void AjouterTrajetBuffer(Trajet* trajet);
+    void ajouterTrajetBuffer(Trajet* trajet);
 
 #ifdef MAP
     // Add your MAP-related code here

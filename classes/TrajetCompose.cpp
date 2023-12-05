@@ -19,6 +19,6 @@ void TrajetCompose::Afficher() const {
     }
 }
 
-char TrajetCompose::getDepart() const {return trajets[0]->getDepart();}
+char TrajetCompose::GetDepart() const {return trajets[0]->GetDepart();}
 
-char TrajetCompose::getArrivee() const {return trajets[nombreTrajets - 1]->getArrivee();}
+char TrajetCompose::GetArrivee() const {return trajets[nombreTrajets - 1]->GetArrivee();}
