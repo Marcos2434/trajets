@@ -9,6 +9,7 @@
 
 using namespace std;
 
+#define MAX_INPUT_CHARACTERS 20 
 
 int main() {
     /* 
@@ -100,7 +101,7 @@ int main() {
                     case 1: {
                         cout << "Veuillez definir le trajet simple" << endl;
                         cout << "Attention! Les stations sont définies comme des caractères" << endl;
-                        char depart, arrivee, moyenTransport[10];
+                        char depart, arrivee, moyenTransport[MAX_INPUT_CHARACTERS];
                         cout << "Depart (Ex. A): ";
                         cin >> depart;
                         cout << "Arrivee (Ex. B): ";
@@ -116,7 +117,7 @@ int main() {
                         cin >> nombreTrajets;
 
                         Trajet** trajets = new Trajet*[nombreTrajets];
-                        char depart, arrivee, moyenTransport[10];
+                        char depart, arrivee, moyenTransport[MAX_INPUT_CHARACTERS];
 
                         for (unsigned int i = 0; i < nombreTrajets; i++) {
                             cout << "Depart (Ex. A): ";
