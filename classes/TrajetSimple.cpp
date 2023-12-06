@@ -39,7 +39,7 @@ char TrajetSimple::GetArrivee() const {return arrivee;}
 
 //-------------------------------------------- Constructeurs - destructeur
 
-TrajetSimple::TrajetSimple(char& depart, char& arrivee, const char* moyenTransport)
+TrajetSimple::TrajetSimple(char depart, char arrivee, const char* moyenTransport)
     : depart(depart), arrivee(arrivee), moyenTransport(moyenTransport) {
     #ifdef MAP
         cout << "Appel au constructeur de <TrajetSimple>" << endl;

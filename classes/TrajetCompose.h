@@ -52,7 +52,7 @@ public:
 
     //-------------------------------------------- Constructeurs - destructeur
 
-        TrajetCompose(Trajet** trajets, unsigned int & nombreTrajets);
+        TrajetCompose(Trajet** trajets, unsigned int nombreTrajets);
         // Mode d'emploi : Détruit l'objet Trajet.
         // Contrat : Aucun.
 

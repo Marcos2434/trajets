@@ -47,7 +47,7 @@ char TrajetCompose::GetArrivee() const {return trajets[nombreTrajets - 1]->GetAr
 
 //-------------------------------------------- Constructeurs - destructeur
 
-TrajetCompose::TrajetCompose(Trajet** trajets, unsigned int & nombreTrajets)
+TrajetCompose::TrajetCompose(Trajet** trajets, unsigned int nombreTrajets)
     : trajets(trajets), nombreTrajets(nombreTrajets) {
     #ifdef MAP
         cout << "Appel au constructeur de <TrajetCompose>" << endl;

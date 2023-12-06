@@ -51,7 +51,7 @@ public:
 
     //-------------------------------------------- Constructeurs - destructeur
 
-        TrajetSimple(char& depart, char& arrivee, const char* moyenTransport);
+        TrajetSimple(char depart, char arrivee, const char* moyenTransport);
         // Mode d'emploi : Construit un trajet simple.
         // Contrat : Aucun.
 
