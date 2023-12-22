@@ -68,7 +68,7 @@ public:
 private:
     char depart;
     char arrivee;
-    const char* moyenTransport;
+    char* moyenTransport;
 
 
 protected:

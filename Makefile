@@ -23,4 +23,4 @@ run: main
 	./trajet
 
 clean:
-	rm -f trajets *.o
+	rm -f trajets *.o classes/*.o

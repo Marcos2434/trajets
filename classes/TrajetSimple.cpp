@@ -40,7 +40,11 @@ char TrajetSimple::GetArrivee() const {return arrivee;}
 //-------------------------------------------- Constructeurs - destructeur
 
 TrajetSimple::TrajetSimple(char depart, char arrivee, const char* moyenTransport)
-    : depart(depart), arrivee(arrivee), moyenTransport(moyenTransport) {
+    : depart(depart), arrivee(arrivee) {
+
+    this->moyenTransport = new char[strlen(moyenTransport) + 1];
+    strcpy(this->moyenTransport, moyenTransport);
+
     #ifdef MAP
         cout << "Appel au constructeur de <TrajetSimple>" << endl;
     #endif

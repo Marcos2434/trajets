@@ -120,13 +120,17 @@ int main() {
                         char depart, arrivee, moyenTransport[MAX_INPUT_CHARACTERS];
 
                         for (unsigned int i = 0; i < nombreTrajets; i++) {
-                            cout << "Depart (Ex. A): ";
-                            cin >> depart;
+                            if (i == 0) {
+                                cout << "Depart (Ex. A): ";
+                                cin >> depart;
+                            }
                             cout << "Arrivee (Ex. B): ";
                             cin >> arrivee;
                             cout << "Moyen de transport (Ex. MT1): ";
                             cin >> moyenTransport;
+                        
                             trajets[i] = new TrajetSimple(depart, arrivee, moyenTransport);
+                            depart = arrivee;
                         }
 
                         TrajetCompose* TC = new TrajetCompose(trajets, nombreTrajets);
