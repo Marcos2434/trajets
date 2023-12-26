@@ -162,16 +162,26 @@ void Catalogue::Charger(const string nomFichier, const int mode) {
 
         // filtrer les trajets qui ne correspondent pas au mode de chargement
         if (mode == 2 && typeTrajet != typeTrajetAutorise) continue;
-        if (mode == 3 && (departAutorise != typeTrajet[0] || arriveeAutorise != typeTrajet[1])) continue;
+        
 
         // on crée le trajet
         if (typeTrajet == "TS") {
+            
             char d = row[1][0];
             char a = row[2][0];
+
+            if (mode == 3 && (d != departAutorise || a != arriveeAutorise)) continue;
+
             const char* mt = new char[row[3].length() + 1];
             mt = row[3].c_str();
             AjouterTrajet(new TrajetSimple(d, a, mt));
         } else if (typeTrajet == "TC") {
+            
+            char d = row[1][0];
+            char a = row[row.size() - 2][0];
+
+            if (mode == 3 && (d != departAutorise || a != arriveeAutorise)) continue;
+
             unsigned int nombreTrajets = (row.size() - 1) / 3;
             Trajet** trajets = new Trajet*[nombreTrajets];
             unsigned int j;
@@ -186,17 +196,6 @@ void Catalogue::Charger(const string nomFichier, const int mode) {
             }
             
             AjouterTrajet(new TrajetCompose(trajets, nombreTrajets));
-
-
-            // Trajet* trajets1[] = {
-            //     new TrajetSimple('B', 'Y', "MT3"),
-            //     new TrajetSimple('Y', 'C', "MT2")
-            // };
-
-            // TrajetCompose* TC1 = new TrajetCompose(trajets1, 2);
-            // AjouterTrajet(TC1);
-
-
         }
     }
 }
