@@ -127,6 +127,7 @@ void Catalogue::Charger(const string nomFichier, const int mode) {
 
     string typeTrajetAutorise;
     char departAutorise, arriveeAutorise;
+    unsigned int n, m;
 
     if (mode == 2) {
         while (typeTrajetAutorise != "TS" && typeTrajetAutorise != "TC") {
@@ -138,11 +139,22 @@ void Catalogue::Charger(const string nomFichier, const int mode) {
         cin >> departAutorise;
         cout << "Veuillez entrer la ville d'arrivée autorisée: ";
         cin >> arriveeAutorise;
+    } else if (mode == 4) {
+        cout << "Veuillez entrer l'intervalle inférieur (n): ";
+        cin >> n;
+        cout << "Veuillez entrer l'intervalle supérieur (m): ";
+        cin >> m;
     }
 
     // on lit le fichier ligne par ligne
     string ligne;
+    unsigned int i = 0;
     while (getline(fichier, ligne)) {
+        if (mode == 4 && (i < n-1 || i > m-1)) {
+            i++;
+            continue;
+        };
+
         // on extrait les données de la ligne
         stringstream ss(ligne);
 
@@ -186,7 +198,7 @@ void Catalogue::Charger(const string nomFichier, const int mode) {
             Trajet** trajets = new Trajet*[nombreTrajets];
             unsigned int j;
             for (unsigned int i = 0; i < nombreTrajets; i++) {
-                j = i * 3;
+                j = (i * 3) + 1;
                 char d = row[j][0];
                 char a = row[j+1][0];
                 const char* mt = new char[row[j+2].length() + 1];
