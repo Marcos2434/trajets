@@ -61,7 +61,7 @@ int main() {
     cout << endl;
     */
 
-    system("clear");
+    // system("clear");
     // ASCII art for "Bienvenue!"
     cout << ".______    __   _______ .__   __. ____    ____  _______ .__   __.  __    __   _______  __ \n";
     cout << "|   _  \\  |  | |   ____||  \\ |  | \\   \\  /   / |   ____||  \\ |  | |  |  |  | |   ____||  |\n";
@@ -81,16 +81,18 @@ int main() {
             "Ajouter un trajet au catalogue courant", 
             "Afficher le catalogue courant",
             "Recherche le parcours",
+            "Charger un catalogue de trajets (lecture d'un fichier)",
+            "Sauvegarder un catalogue courant (écriture dans un fichier)",
             "Quitter le Program"
         };
-        unsigned int nb_options = 4;
+        unsigned int nb_options = 6;
         for (unsigned int i = 0; i < nb_options; i++) {
             cout << i+1 << ". " << options[i] << endl;
         }
         int option;
         cout << "\n> ";
         cin >> option;
-        system("clear");
+        // system("clear");
 
         switch(option) {
             case 1: {
@@ -200,6 +202,27 @@ int main() {
                 break;
             }
             case 4: {
+                cout << "Veuillez choisir un fichier à charger: ";
+                char nomFichier[MAX_INPUT_CHARACTERS];
+                cin >> nomFichier;
+                
+                cout 
+                << "1. Sans critère de sélection" << endl
+                << "2. Selon le type des trajets" << endl
+                << "3. Selon la ville de départ et / ou la ville d'arrivée" << endl
+                << "4. Selon une sélection de trajets" << endl;
+
+                cout << "Veuillez choisir un le mode de chargement: ";
+                int optionTypeChargement;
+                cin >> optionTypeChargement;
+
+                catalogue.Charger(nomFichier, optionTypeChargement);
+                break;
+            }
+            case 5:{
+                break;
+            }
+            case 6: {
                 cout << "\nMerci d'avoir utilise ce programme, à bientôt!\n" << endl;
                 return 0;
             }
@@ -207,6 +230,6 @@ int main() {
                 break;
             }
         }
-        system("clear");
+        // system("clear");
     }
 };

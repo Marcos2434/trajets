@@ -20,9 +20,13 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 //------------------------------------------------------ Include personnel
 #include "Catalogue.h"
+#include "TrajetSimple.h"
+#include "TrajetCompose.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -108,6 +112,91 @@ void Catalogue::RechercheAvancee(char departVoyageSouhaite, char arriveeVoyageSo
             ajouterTrajetBuffer(trajets[i]);
             RechercheAvancee(trajets[i]->GetArrivee(), arriveeVoyageSouhaite);
             nombreTrajetsBuffer = 0;
+        }
+    }
+}
+
+void Catalogue::Charger(const string nomFichier, const int mode) {
+    // on ouvre le fichier
+    ifstream fichier(nomFichier);
+    if (!fichier) {
+        cerr << "Erreur lors de l'ouverture du fichier " << nomFichier << endl;
+        return;
+    }
+
+
+    string typeTrajetAutorise;
+    char departAutorise, arriveeAutorise;
+
+    if (mode == 2) {
+        while (typeTrajetAutorise != "TS" && typeTrajetAutorise != "TC") {
+            cout << "Veuillez entrer le type de trajet autorisé (TS ou TC): ";
+            cin >> typeTrajetAutorise;
+        }
+    } else if (mode == 3) {
+        cout << "Veuillez entrer la ville de départ autorisée: ";
+        cin >> departAutorise;
+        cout << "Veuillez entrer la ville d'arrivée autorisée: ";
+        cin >> arriveeAutorise;
+    }
+
+    // on lit le fichier ligne par ligne
+    string ligne;
+    while (getline(fichier, ligne)) {
+        // on extrait les données de la ligne
+        stringstream ss(ligne);
+
+        vector<string> row;
+        string field;
+        while (getline(ss, field, ',')) {
+            // ajouter le champ, sans les espaces, à la ligne 
+            field.erase(remove_if(field.begin(), field.end(), ::isspace), field.end());
+            row.push_back(field);
+        }
+
+        string typeTrajet;
+        typeTrajet = row[0];
+
+       
+
+
+        // filtrer les trajets qui ne correspondent pas au mode de chargement
+        if (mode == 2 && typeTrajet != typeTrajetAutorise) continue;
+        if (mode == 3 && (departAutorise != typeTrajet[0] || arriveeAutorise != typeTrajet[1])) continue;
+
+        // on crée le trajet
+        if (typeTrajet == "TS") {
+            char d = row[1][0];
+            char a = row[2][0];
+            const char* mt = new char[row[3].length() + 1];
+            mt = row[3].c_str();
+            AjouterTrajet(new TrajetSimple(d, a, mt));
+        } else if (typeTrajet == "TC") {
+            unsigned int nombreTrajets = (row.size() - 1) / 3;
+            Trajet** trajets = new Trajet*[nombreTrajets];
+            unsigned int j;
+            for (unsigned int i = 0; i < nombreTrajets; i++) {
+                j = i * 3;
+                char d = row[j][0];
+                char a = row[j+1][0];
+                const char* mt = new char[row[j+2].length() + 1];
+                strcpy(const_cast<char*>(mt), row[j+2].c_str());
+                trajets[i] = new TrajetSimple(d, a, mt);
+                // trajets[i] = new TrajetSimple('A', 'B', "MT1");
+            }
+            
+            AjouterTrajet(new TrajetCompose(trajets, nombreTrajets));
+
+
+            // Trajet* trajets1[] = {
+            //     new TrajetSimple('B', 'Y', "MT3"),
+            //     new TrajetSimple('Y', 'C', "MT2")
+            // };
+
+            // TrajetCompose* TC1 = new TrajetCompose(trajets1, 2);
+            // AjouterTrajet(TC1);
+
+
         }
     }
 }

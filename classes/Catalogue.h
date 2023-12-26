@@ -19,6 +19,7 @@
 #define CATALOGUE_H
 
 //--------------------------------------------------- Interfaces utilisées
+using namespace std;
 #include "Trajet.h"
 
 //------------------------------------------------------------- Constantes
@@ -52,6 +53,8 @@ public:
     void RechercheAvancee(char departVoyageSouhaite, char arriveeVoyageSouhaite); // pas const car on doit changer le buffer
     // Mode d'emploi : affiche tous les trajets du catalogue qui ont le même
     // Contrat : aucun
+
+    void Charger(const string nomFichier, const int optionTypeChargement);
 
 //------------------------------------------------- Surcharge d'opérateurs
 

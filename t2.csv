@@ -1,0 +1,4 @@
+TS, A, B, MT1
+TS, B, C, MT2
+TC, B, C, MT3, C, D, MT3
+TC, D, E, MT4, E, F, MT4
