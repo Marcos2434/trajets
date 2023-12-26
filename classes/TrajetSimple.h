@@ -46,6 +46,10 @@ public:
         char GetArrivee() const override;
         // Mode d'emploi : Retourne le point d'arrivée du trajet.
         // Contrat : Aucun.
+        
+        char* GetMoyenTransport() const override;
+        // Mode d'emploi : Retourne le moyen de transport du trajet.
+        // Contrat : Aucun.
 
     //------------------------------------------------- Surcharge d'opérateurs
 

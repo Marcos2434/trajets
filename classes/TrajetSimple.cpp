@@ -35,6 +35,8 @@ char TrajetSimple::GetDepart() const {return depart;}
 
 char TrajetSimple::GetArrivee() const {return arrivee;}
 
+char* TrajetSimple::GetMoyenTransport() const {return moyenTransport;}
+
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur

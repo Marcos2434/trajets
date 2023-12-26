@@ -43,6 +43,12 @@ char TrajetCompose::GetDepart() const {return trajets[0]->GetDepart();}
 
 char TrajetCompose::GetArrivee() const {return trajets[nombreTrajets - 1]->GetArrivee();}
 
+unsigned int TrajetCompose::GetNombreTrajets() const {return nombreTrajets;}
+
+Trajet** TrajetCompose::GetTrajets() const {return trajets;}
+
+char* TrajetCompose::GetMoyenTransport() const {return nullptr;}; // undefined behaviour, depends on future implementation
+
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur

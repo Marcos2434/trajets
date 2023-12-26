@@ -116,6 +116,82 @@ void Catalogue::RechercheAvancee(char departVoyageSouhaite, char arriveeVoyageSo
     }
 }
 
+void Catalogue::Sauvegarder(const string nomFichicer, const int mode) const {
+    // on ouvre le fichier
+    ofstream fichier(nomFichicer);
+    if (!fichier) {
+        cerr << "Erreur lors de l'ouverture du fichier " << nomFichicer << endl;
+        return;
+    }
+
+    string typeTrajetAutorise;
+    char departAutorise, arriveeAutorise;
+    unsigned int n, m;
+
+    if (mode == 2) {
+        while (typeTrajetAutorise != "TS" && typeTrajetAutorise != "TC") {
+            cout << "Veuillez entrer le type de trajet autorisé (TS ou TC): ";
+            cin >> typeTrajetAutorise;
+        }
+    } else if (mode == 3) {
+        cout << "Veuillez entrer la ville de départ autorisée: ";
+        cin >> departAutorise;
+        cout << "Veuillez entrer la ville d'arrivée autorisée: ";
+        cin >> arriveeAutorise;
+    } else if (mode == 4) {
+        cout << "Veuillez entrer l'intervalle inférieur (n): ";
+        cin >> n;
+        cout << "Veuillez entrer l'intervalle supérieur (m): ";
+        cin >> m;
+    }
+
+    // on écrit les trajets dans le fichier s'ils correspondent au mode de sauvegarde
+    for (size_t i = 0; i < nombreTrajets; i++) {
+        TrajetSimple *trajetSimple = dynamic_cast<TrajetSimple*>(trajets[i]);
+        TrajetCompose *trajetCompose = dynamic_cast<TrajetCompose*>(trajets[i]);
+
+        if (trajetSimple != nullptr && ( mode == 1 || mode == 4 ||
+            (mode == 2 && typeTrajetAutorise == "TS" )
+            || (mode == 3 && (trajetSimple->GetDepart() == departAutorise && trajetSimple->GetArrivee() == arriveeAutorise))
+            )) 
+            {
+            
+            if (mode == 4 && (i < n-1 || i > m-1)) continue;
+            
+            // on écrit le trajet simple dans le fichier
+            fichier << "TS, " 
+            << trajetSimple->GetDepart() 
+            << ", " << trajetSimple->GetArrivee() 
+            << ", " << trajetSimple->GetMoyenTransport() << endl;
+        
+        } else if (
+            trajetCompose != nullptr 
+            && (mode == 1 || mode == 4 || ((mode == 2 && typeTrajetAutorise == "TC")
+            || (mode == 3 && (trajetCompose->GetDepart() == departAutorise && trajetCompose->GetArrivee() == arriveeAutorise)
+            )))) {
+
+            if (mode == 4 && (i < n-1 || i > m-1)) continue;
+            
+            fichier << "TC, ";
+            for (unsigned int i = 0; i < trajetCompose->GetNombreTrajets(); i++) {
+                
+                fichier 
+                << trajetCompose->GetTrajets()[i]->GetDepart() 
+                << ", " << trajetCompose->GetTrajets()[i]->GetArrivee() 
+                << ", " << trajetCompose->GetTrajets()[i]->GetMoyenTransport();
+
+                if (i < trajetCompose->GetNombreTrajets() - 1) {
+                    fichier << ", ";
+                }
+            }
+            fichier << endl;
+        }
+    }
+
+    // fermeture du fichier
+    fichier.close();
+}
+
 void Catalogue::Charger(const string nomFichier, const int mode) {
     // on ouvre le fichier
     ifstream fichier(nomFichier);

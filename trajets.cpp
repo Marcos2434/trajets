@@ -220,6 +220,19 @@ int main() {
                 break;
             }
             case 5:{
+                cout << "Veuillez choisir un nombre du fichier à sauvegarder: ";
+                char nomFichier[MAX_INPUT_CHARACTERS];
+                cin >> nomFichier;
+                cout 
+                << "1. Sans critère de sélection" << endl
+                << "2. Selon le type des trajets" << endl
+                << "3. Selon la ville de départ et / ou la ville d'arrivée" << endl
+                << "4. Selon une sélection de trajets" << endl;
+
+                cout << "Veuillez choisir un le mode de chargement: ";
+                int optionTypeChargement;
+                cin >> optionTypeChargement;
+                catalogue.Sauvegarder(nomFichier, optionTypeChargement);
                 break;
             }
             case 6: {

@@ -48,6 +48,16 @@ public:
         // Mode d'emploi : Retourne le point d'arrivée du trajet.
         // Contrat : Aucun.
 
+        char* GetMoyenTransport() const override;
+
+        unsigned int GetNombreTrajets() const;
+        // Mode d'emploi : Retourne le nombre de trajets du trajet composé.
+        // Contrat : Aucun.
+
+        Trajet** GetTrajets() const;
+        // Mode d'emploi : Retourne le tableau de trajets du trajet composé.
+        // Contrat : Aucun.
+
     //------------------------------------------------- Surcharge d'opérateurs
 
     //-------------------------------------------- Constructeurs - destructeur

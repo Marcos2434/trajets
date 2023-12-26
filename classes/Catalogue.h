@@ -54,7 +54,9 @@ public:
     // Mode d'emploi : affiche tous les trajets du catalogue qui ont le même
     // Contrat : aucun
 
-    void Charger(const string nomFichier, const int optionTypeChargement);
+    void Charger(const string nomFichier, const int mode);
+
+    void Sauvegarder(const string nomFichier, const int mode) const;
 
 //------------------------------------------------- Surcharge d'opérateurs
 

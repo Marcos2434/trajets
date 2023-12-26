@@ -49,6 +49,10 @@ public:
         // Mode d'emploi : Retourne le point d'arrivée du trajet.
         // Contrat : Aucun.
 
+        virtual char* GetMoyenTransport() const = 0;
+        // Mode d'emploi : Retourne le moyen de transport du trajet.
+        // Contrat : Aucun.
+
     //------------------------------------------------- Surcharge d'opérateurs
 
     //-------------------------------------------- Constructeurs - destructeur
