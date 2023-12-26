@@ -187,6 +187,7 @@ void Catalogue::Charger(const string nomFichier, const int mode) {
             const char* mt = new char[row[3].length() + 1];
             mt = row[3].c_str();
             AjouterTrajet(new TrajetSimple(d, a, mt));
+            i++;
         } else if (typeTrajet == "TC") {
             
             char d = row[1][0];
@@ -204,10 +205,10 @@ void Catalogue::Charger(const string nomFichier, const int mode) {
                 const char* mt = new char[row[j+2].length() + 1];
                 strcpy(const_cast<char*>(mt), row[j+2].c_str());
                 trajets[i] = new TrajetSimple(d, a, mt);
-                // trajets[i] = new TrajetSimple('A', 'B', "MT1");
             }
             
             AjouterTrajet(new TrajetCompose(trajets, nombreTrajets));
+            i++;
         }
     }
 }
